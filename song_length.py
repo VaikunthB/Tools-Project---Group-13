@@ -6,7 +6,7 @@ song_lengths = []
 song_length_dic = {}
 for filename in os.listdir(path):
     song_file = path+ r"/" + filename
-    with open(song_file,encoding="utf8") as fp:
+    with open(song_file,encoding="latin1") as fp:
         data = fp.read().split()
         length_value = len(data)
         song_length_dic.update({ 
