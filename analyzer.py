@@ -1,5 +1,6 @@
 import re
-
+from scipy import stats
+import os
 
 def song_id(item):
     pattern = r'''
@@ -68,3 +69,15 @@ def song_name(item):
 
     return song
 
+def song_length(path,song,data):
+    length_value = []
+    for filename in os.listdir(path):
+        song_file = path+ "/" + filename
+        with open(song_file) as fp:
+            all_data = fp.read()
+        length_value.append(len(all_data))
+    sorted_length = sorted(length_value)
+    song_length = len(data)
+
+    dimension = (stats.percentileofscore(sorted_length,song_length))/100
+    return round(dimension,3)

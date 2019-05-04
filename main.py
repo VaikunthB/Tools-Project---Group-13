@@ -10,10 +10,11 @@ def main(lyrics_folder):
 
     for filename in os.listdir(lyrics_folder):
         filelist.append(filename)
+
     filelist.sort()
     final_list = []
 
-    for item in filelist[0:5]:
+    for item in filelist[0:10]:
         path = lyrics_folder + "/" + item
         with open(path, 'r') as fp:
             data = fp.read()
@@ -21,11 +22,13 @@ def main(lyrics_folder):
         song_id = analyzer.song_id(item)
         artist_name = analyzer.artist_name(item)
         song_name = analyzer.song_name(item)
+        song_length = analyzer.song_length(lyrics_folder,item,data)
 
         song_attributes = {
                'id' : song_id,
                'artist': artist_name,
-               'title':song_name
+               'title':song_name,
+               'length':song_length
                }
         final_list.append(song_attributes)
     json_input = {'characterizations' : final_list}
