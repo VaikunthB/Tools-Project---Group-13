@@ -1,12 +1,13 @@
 import os
 import analyzer
 import json
-
+import file_extractor as fe
 
 
 def main(lyrics_folder):
 
     filelist = []
+    length_value = []
 
     for filename in os.listdir(lyrics_folder):
         filelist.append(filename)
@@ -16,13 +17,12 @@ def main(lyrics_folder):
 
     for item in filelist[0:10]:
         path = lyrics_folder + "/" + item
-        with open(path, 'r') as fp:
-            data = fp.read()
+        data = fe.extractor(path)
             
         song_id = analyzer.song_id(item)
         artist_name = analyzer.artist_name(item)
         song_name = analyzer.song_name(item)
-        song_length = analyzer.song_length(lyrics_folder,item,data)
+        song_length = analyzer.song_length(data,lyrics_folder)
 
         song_attributes = {
                'id' : song_id,
