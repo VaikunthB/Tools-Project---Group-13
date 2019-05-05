@@ -97,14 +97,12 @@ def complexity(data,complex_avg):
             real_words.append(item)
 
     no_realwords = len(collections.Counter(real_words))
-    print(no_realwords)
-
     if len(data) == 0:
         return 0
 
     else:
         dimension = (stats.percentileofscore(complex_avg,no_realwords))/100
-        return dimension
+        return round(dimension,3)
 
 
 

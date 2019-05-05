@@ -2,6 +2,8 @@ import os
 import analyzer
 import json
 import file_extractor as fe
+import average_calculator as ac
+
 
 def main(lyrics_folder):
 
@@ -17,12 +19,8 @@ def main(lyrics_folder):
 
     filelist.sort()
     final_list = []
-    sorted_length = []
-    complex_avg = []
-    for item in folder_data:
-        sorted_length.append(len(item))
-    sorted_length.sort()
-
+    complex_avg = ac.complexity(folder_data)
+    
 
     for item in filelist[0:30]:
         path = lyrics_folder + "/" + item
@@ -32,7 +30,7 @@ def main(lyrics_folder):
         song_id = analyzer.song_id(item)
         artist_name = analyzer.artist_name(item)
         song_name = analyzer.song_name(item)
-        song_length = analyzer.song_length(data,sorted_length)
+        song_length = analyzer.song_length(data,ac.song_length(folder_data))
         child_friend = analyzer.child_friend(data,bad_avg)
         complexity = analyzer.complexity(data,complex_avg)
 
@@ -41,7 +39,8 @@ def main(lyrics_folder):
                'artist': artist_name,
                'title':song_name, 
                'kid_safe':child_friend,
-               'length':song_length
+               'length':song_length,
+               'complexity': complexity
                }
         final_list.append(song_attributes)
     json_input = {'characterizations' : final_list}
