@@ -62,17 +62,12 @@ def song_name(item):
 
     return song
 
-def song_length(data,folder_data):
-    sorted_length = []
-    for item in folder_data:
-        sorted_length.append(len(item))
-    sorted_length.sort()
+def song_length(data,sorted_length):
     song_length = len(data)
-
     dimension = (stats.percentileofscore(sorted_length,song_length))/100
     return round(dimension,3)
 
-def child_friend(data,folder_data):
+def child_friend(data,bad_avg):
     count = 0
     split_data = data.split()
     for word in split_data:
@@ -84,5 +79,5 @@ def child_friend(data,folder_data):
         return 1
 
     else:
-        dimension = (stats.percentileofscore(bad_lengths(folder_data),song_length))/100
+        dimension = (stats.percentileofscore(bad_avg,song_length))/100
         return (1-round(dimension,3))
