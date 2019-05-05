@@ -2,7 +2,7 @@ import re
 from scipy import stats
 import file_extractor as fe
 import collections
-from stopwords import stop
+import stopwords as sw
 
 def bad_words():
     arrBad = ['nigga','shit','fuck','bitch','niggas','ass','fucking','niggaz','bitches','sex','dick','pussy','fucked','motherfucker','fuckin','lust','bum','motherfuckers',
@@ -72,7 +72,7 @@ def child_friend(data,bad_avg):
     count = 0
     split_data = data.split()
     for word in split_data:
-        if word in bad_words():
+        if word.lower() in bad_words():
             count += 1
     song_length = count
 
@@ -86,14 +86,28 @@ def child_friend(data,bad_avg):
 def mood():
     gggr
 
-def love():
-    ddfd
+def love(data,love_avg):
+    count = 0
+    split_data = data.split()
+    for word in split_data:
+        if word.lower() in sw.love_words():
+            count += 1
+    love_length = count
+
+    if love_length == 0:
+        return 1
+
+    else:
+        dimension = (stats.percentileofscore(love_avg,love_length))/100
+        return (1-round(dimension,3))
+    
+    
 
 def complexity(data,complex_avg):
     real_words = []
 
     for item in data.split():
-        if item not in stop():
+        if item not in sw.stop():
             real_words.append(item)
 
     no_realwords = len(collections.Counter(real_words))

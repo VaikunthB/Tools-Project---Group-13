@@ -26,6 +26,7 @@ def main(lyrics_folder):
         path = lyrics_folder + "/" + item
         data = fe.extractor(path)
         bad_avg = analyzer.bad_lengths(folder_data)
+        love_avg = ac.love(folder_data)
                     
         song_id = analyzer.song_id(item)
         artist_name = analyzer.artist_name(item)
@@ -33,6 +34,7 @@ def main(lyrics_folder):
         song_length = analyzer.song_length(data,ac.song_length(folder_data))
         child_friend = analyzer.child_friend(data,bad_avg)
         complexity = analyzer.complexity(data,complex_avg)
+        love = analyzer.love(data,love_avg)
 
         song_attributes = {
                'id' : song_id,

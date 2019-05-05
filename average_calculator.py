@@ -22,3 +22,7 @@ def song_length(folder_data):
     sorted_length.sort()
 
     return sorted_length
+
+def love(folder_data):
+
+
