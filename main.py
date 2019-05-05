@@ -8,28 +8,33 @@ def main(lyrics_folder):
 
     filelist = []
     length_value = []
+    folder_data = []
 
     for filename in os.listdir(lyrics_folder):
+        song_file = lyrics_folder + "/" +filename
+        data = fe.extractor(song_file)
+        folder_data.append(data)
         filelist.append(filename)
 
     filelist.sort()
     final_list = []
 
-    for item in filelist:
+    for item in filelist[0:30]:
         path = lyrics_folder + "/" + item
         data = fe.extractor(path)
             
         song_id = analyzer.song_id(item)
         artist_name = analyzer.artist_name(item)
         song_name = analyzer.song_name(item)
-        song_length = analyzer.song_length(data,lyrics_folder)
-        child_friend = analyzer.child_friend(data,lyrics_folder)
+        song_length = analyzer.song_length(data,folder_data)
+        child_friend = analyzer.child_friend(data,folder_data)
+        
 
         song_attributes = {
                'id' : song_id,
                'artist': artist_name,
-               'title':song_name,
-               'kid_safe': child_friend,
+               'title':song_name, 
+               'kid_safe':child_friend,
                'length':song_length
                }
         final_list.append(song_attributes)
