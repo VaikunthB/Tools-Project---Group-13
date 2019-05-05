@@ -3,7 +3,6 @@ import analyzer
 import json
 import file_extractor as fe
 
-
 def main(lyrics_folder):
 
     filelist = []
@@ -19,9 +18,11 @@ def main(lyrics_folder):
     filelist.sort()
     final_list = []
     sorted_length = []
+    complex_avg = []
     for item in folder_data:
         sorted_length.append(len(item))
     sorted_length.sort()
+
 
     for item in filelist[0:30]:
         path = lyrics_folder + "/" + item
@@ -33,7 +34,7 @@ def main(lyrics_folder):
         song_name = analyzer.song_name(item)
         song_length = analyzer.song_length(data,sorted_length)
         child_friend = analyzer.child_friend(data,bad_avg)
-        
+        complexity = analyzer.complexity(data,complex_avg)
 
         song_attributes = {
                'id' : song_id,
