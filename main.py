@@ -15,7 +15,7 @@ def main(lyrics_folder):
     filelist.sort()
     final_list = []
 
-    for item in filelist[0:10]:
+    for item in filelist:
         path = lyrics_folder + "/" + item
         data = fe.extractor(path)
             
@@ -23,11 +23,13 @@ def main(lyrics_folder):
         artist_name = analyzer.artist_name(item)
         song_name = analyzer.song_name(item)
         song_length = analyzer.song_length(data,lyrics_folder)
+        child_friend = analyzer.child_friend(data,lyrics_folder)
 
         song_attributes = {
                'id' : song_id,
                'artist': artist_name,
                'title':song_name,
+               'kid_safe': child_friend,
                'length':song_length
                }
         final_list.append(song_attributes)
