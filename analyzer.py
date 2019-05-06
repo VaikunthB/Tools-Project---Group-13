@@ -88,18 +88,18 @@ def mood():
 
 def love(data,love_avg):
     count = 0
+    data.lower()
     split_data = data.split()
-    for word in split_data:
-        if word.lower() in sw.love_words():
-            count += 1
-    love_length = count
+
+    common_elements = (set(split_data) & set(sw.love_words()))
+    love_length = len(common_elements)
 
     if love_length == 0:
-        return 1
+        return 0
 
     else:
         dimension = (stats.percentileofscore(love_avg,love_length))/100
-        return (1-round(dimension,3))
+        return round(dimension,3)
     
     
 
