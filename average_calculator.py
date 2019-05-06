@@ -1,5 +1,7 @@
 from stopwords import stop
 from stopwords import love_words
+from stopwords import positive
+from stopwords import negative
 def complexity(folder_data):
     complex_len = []
 
@@ -35,4 +37,25 @@ def love(folder_data):
     love_length.sort()
 
     return love_length
+
+def mood_length(folder_data):
+    sorted_length = []
+
+    for item in folder_data:
+        item.lower()
+        split_data = item.split()
+        positive_words = len(set(split_data) & set(positive()))
+        negative_words = len(set(split_data) & set(negative()))
+
+        if positive_words >= negative_words:
+            song_length = positive_words - negative_words
+            sorted_length.append(song_length)
+        if negative_words > positive_words:
+            song_length = negative_words - positive_words
+            sorted_length.append(song_length)
+
+    sorted_length.sort()
+
+    return sorted_length
+            
 

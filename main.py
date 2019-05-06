@@ -22,8 +22,8 @@ def main(lyrics_folder):
     complex_avg = ac.complexity(folder_data)
     love_avg = ac.love(folder_data)
     song_avg = ac.song_length(folder_data)
-    love_avg = ac.love(folder_data)
     bad_avg = analyzer.bad_lengths(folder_data)
+    mood_avg = ac.mood_length(folder_data)
 
 
     for item in filelist:
@@ -37,6 +37,7 @@ def main(lyrics_folder):
         child_friend = analyzer.child_friend(data,bad_avg)
         complexity = analyzer.complexity(data,complex_avg)
         love = analyzer.love(data,love_avg)
+        mood = analyzer.mood(data,mood_avg)
 
         song_attributes = {
                'id' : song_id,
@@ -44,6 +45,7 @@ def main(lyrics_folder):
                'title':song_name, 
                'kid_safe':child_friend,
                'love':love,
+               'mood':mood,
                'length':song_length,
                'complexity': complexity
                }
