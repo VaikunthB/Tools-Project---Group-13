@@ -22,14 +22,14 @@ def main(lyrics_folder):
     complex_avg = ac.complexity(folder_data)
     love_avg = ac.love(folder_data)
     song_avg = ac.song_length(folder_data)
+    love_avg = ac.love(folder_data)
+    bad_avg = analyzer.bad_lengths(folder_data)
 
 
     for item in filelist:
         path = lyrics_folder + "/" + item
         data = fe.extractor(path)
-        bad_avg = analyzer.bad_lengths(folder_data)
-        love_avg = ac.love(folder_data)
-                    
+                           
         song_id = analyzer.song_id(item)
         artist_name = analyzer.artist_name(item)
         song_name = analyzer.song_name(item)

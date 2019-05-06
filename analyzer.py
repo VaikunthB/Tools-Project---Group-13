@@ -1,7 +1,6 @@
 import re
 from scipy import stats
 import file_extractor as fe
-import collections
 import stopwords as sw
 
 def bad_words():
@@ -69,12 +68,9 @@ def song_length(data,sorted_length):
     return round(dimension,3)
 
 def child_friend(data,bad_avg):
-    count = 0
+    data.lower()
     split_data = data.split()
-    for word in split_data:
-        if word.lower() in bad_words():
-            count += 1
-    song_length = count
+    song_length = len(list(set(split_data) & set(bad_words())))
 
     if song_length == 0:
         return 1
@@ -87,7 +83,6 @@ def mood():
     gggr
 
 def love(data,love_avg):
-    count = 0
     data.lower()
     split_data = data.split()
 
@@ -104,13 +99,12 @@ def love(data,love_avg):
     
 
 def complexity(data,complex_avg):
-    real_words = []
+    data.lower()
+    item_split = data.split()
 
-    for item in data.split():
-        if item not in sw.stop():
-            real_words.append(item)
+    real_words = (set(item_split) - (set(item_split) & set(sw.stop())))
 
-    no_realwords = len(collections.Counter(real_words))
+    no_realwords = len(real_words)
     if len(data) == 0:
         return 0
 
