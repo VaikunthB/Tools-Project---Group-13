@@ -1,6 +1,5 @@
 from stopwords import stop
 from stopwords import love_words
-import collections
 def complexity(folder_data):
     complex_len = []
 
