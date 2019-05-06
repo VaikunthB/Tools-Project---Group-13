@@ -79,8 +79,21 @@ def child_friend(data,bad_avg):
         dimension = (stats.percentileofscore(bad_avg,song_length))/100
         return (1-round(dimension,3))
 
-def mood():
-    gggr
+def mood(data,mood_avg):
+    data.lower()
+    split_data = data.split()
+    positive_words = len(set(split_data) & set(sw.poslist()))
+    negative_words = len(set(split_data) & set(sw.neglist()))
+
+    if positive_words >= negative_words:
+        song_length = positive_words - negative_words
+        dimension = (stats.percentileofscore(sorted_length,song_length))/100
+        return dimension
+
+    else if negative_words > positive_words:
+        song_length = negative_words - positive_words
+        dimension = (stats.percentileofscore(sorted_length,song_length))/100
+        return dimension
 
 def love(data,love_avg):
     data.lower()
