@@ -42,3 +42,23 @@ The second part of the file is to carry out the dimension calculator for each in
 After all calculations are complete, the information is converted into a StdOut JSON object, which is then printed.
 
 ### analyzer.py
+
+This file contains the various different functions to classify the song. The first few functions use regex to identify song names, artists and the ID. 
+
+The other analyzing functions for mood, length, complexity, child-friendliness use song lyrics and average values as inputs and then find its dimension. The dimension is calculated on a relative basis, i.e. each song is given a dimension based on its percentile value in the library.
+
+### average_calculator.py
+
+This file contains the various functions to calculate the characterization value of all songs in the folder and store the in a list. This serves as a preprocessor for the analzyer function.
+
+### stopwords.py
+
+This file contains lists of words used for comparison. There are four lists, love words, stopwords, positive words and negative words. 
+
+### file_extractor.py
+
+This file contains an extractor function to reduce the multiple usage of reading the text files.
+
+### testing.py
+
+This file contains unittesting to check if the analyzer functions are running effectively, as well as the main.py file.
