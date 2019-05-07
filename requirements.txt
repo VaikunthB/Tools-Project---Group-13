@@ -1,0 +1,3 @@
+SCIPY MODULE
+
+To calculate percentile of all functions we have imported the scipy.stats module to carry out percentile functions.
